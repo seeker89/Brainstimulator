@@ -1,0 +1,42 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           			controllers.Browser.browse(cat = "home")
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file              			 controllers.Assets.at(path="/public", file)
+
+# BROWSER - VIDEO
+GET 	/videos						controllers.Browser.browse(cat = "home")
+GET 	/videos/					controllers.Browser.browse(cat = "home")
+GET 	/videos/:cat					controllers.Browser.browse(cat: String)
+GET	/rss.xml					controllers.Browser.rss()
+
+# VIDEO
+GET 	/video/:id					controllers.Browser.showVideo(id : Long)
+GET 	/series/:id					controllers.Browser.showSeries(id : Long)
+
+# ACCOUNT
+GET	/login						controllers.Account.login()
+GET	/logout						controllers.Account.logout()
+POST	/login						controllers.Account.signIn()
+POST	/signUp						controllers.Account.signUp()
+GET 	/account					controllers.Account.account()
+#GET 	/account/videos					controllers.Account.videos()
+POST 	/addVideo					controllers.Account.addVideo()
+POST 	/addSeries					controllers.Account.addSeries()
+GET 	/addFavourite/:id				controllers.Account.addFavourite(id: Long)
+POST 	/addFavouriteAsync				controllers.Account.addFavouritePost()
+GET 	/vote/:id					controllers.Account.vote(id: Long)
+POST 	/voteAsc					controllers.Account.votePost()
+POST 	/addCommentAsync				controllers.Account.addCommentPost()
+
+# ADMIN
+GET 	/admin						controllers.Admin.index()
+GET	/admin/videos					controllers.Admin.getVideos()
+DELETE	/admin/videos/remove/:id			controllers.Admin.removeVideo(id : Long)
+
+GET	/admin/users					controllers.Admin.getUsers()
+DELETE	/admin/users/remove/:id				controllers.Admin.removeUser(id : Long)

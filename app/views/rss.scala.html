@@ -1,0 +1,18 @@
+@(videos: List[Video], serieses: List[Series])
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+	<channel>
+	  <title>BrainStimulator.com channel</title>
+	  <link>BrainStimulator.com</link>
+	  <description>The best e-learning resources in one place</description>
+	
+	@for(video <- videos){
+	  <item>
+	    <title>@video.title</title>
+	    <link>http://BrainStimulator.com@routes.Browser.showVideo(video.id)</link>
+	    <description>@video.description</description>
+	  </item>
+	}
+	</channel>
+
+</rss>

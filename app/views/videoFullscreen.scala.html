@@ -1,0 +1,95 @@
+@(title: String, video: Video, user: User, isFavourite : Boolean)
+
+@if(user != null){
+	@browserHeader(title, user.firstName)
+}else{
+	@browserHeader(title, "Guest")
+}
+      <div class="row-fluid">
+        <div class="span8">
+        	<p class="lead">@video.title</p>
+          <embed 
+          	width="853" 
+          	height="480" 
+          	src="http://www.youtube.com/v/@video.url" 
+          	type="application/x-shockwave-flash"
+          ></embed>
+          
+          <div class="row-fluid">
+          	<div class="span12">
+          		<p class="lead">@video.description</p>
+          		@if(user != null){
+          		<div class="btn-group">
+                    @if(isFavourite){
+                        <a id="btn_favourite" class="btn disabled"
+                           href="@routes.Account.addFavourite(video.id)">
+                            Already in Favourites
+                        </a>
+                    }else{
+                        <a id="btn_favourite" class="btn" href="@routes.Account.addFavourite(video.id)">Add
+                            to Favourites</a>
+                    }
+                    <a id="btn_vote" class="btn" href="@routes.Account.vote(video.id)">Vote</a>
+				</div>
+				}
+          		<p class="text-info text-right">Views: <strong>@video.views</strong>,
+                    votes: <strong><span id="votes-number">@video.votes</span></strong></p>
+          	</div>
+          </div>
+          
+          @for(comment <- video.getOrderedComments()){
+	          <div class="row-fluid">
+	          	<div class="span12 well">
+	          		<p>@comment.author.firstName @comment.author.lastName on @comment.registered</p>
+	          		<p>@comment.text</p>
+	          	</div>
+	          </div>
+          }
+          
+          <div id="container-comments">
+          
+          </div>
+          
+          @if(user != null){
+	          <div class="row-fluid">
+	          	<div class="span12">
+	          		<p class="well">
+						<textarea rows="5" cols="100" id="textarea-comment"></textarea><br />
+						<a href="#add-comment-@video.id" class="btn btn-success" id="button-comment">Save this comment</a>
+					</p>
+	          	</div>
+	          </div>
+          }else{
+	          <div class="row-fluid">
+	          	<div class="span12">
+	          		<p class="well">
+						<a href="@routes.Account.login()">Login to add a comment!</a>
+					</p>
+	          	</div>
+	          </div>
+          }
+          
+        </div>
+        
+        <div class="span4">
+          @for(series <- video.serieses){
+          <div class="row-fluid">
+          	<div class="span12">
+          		<p class="lead">Series: @series.title</p>
+          	</div>
+          </div>
+          @for(vid <- series.videos){
+	          <div class="row-fluid">
+	          	<div class="span12">
+	          		<p class="lead"><a href="@routes.Browser.showVideo(vid.id)">@vid.title</a></p>
+	          		<p>@videoThumbnailSmall(vid)</p>
+	          	</div>
+	          </div>
+          }
+         }
+        </div>
+      </div>
+
+@browserFooter()
+          
+          

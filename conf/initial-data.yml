@@ -1,0 +1,123 @@
+# Users
+
+users:
+
+  - !!models.User
+    mail: mikolaj@pawlikowski.pl
+    firstName: Mikolaj
+    lastName: Pawlikowski
+    password: secret
+    age: 42
+    registered: 2013-05-30
+    favouriteVideos: null
+    favouriteSeries: null
+    videos: null
+    serieses: null
+    
+  - !!models.User
+    mail: brad@pitt.com
+    firstName: Brad
+    lastName: Pitt
+    password: key
+    age: 42
+    registered: 2013-05-30
+    favouriteVideos: null
+    favouriteSeries: null
+    videos: null
+    serieses: null
+
+
+videos:
+
+  - !!models.Video
+    author: !!models.User
+        id: 1
+    url: 8ucz_pm3LX8
+    title: Nice cat
+    description: lovely cat drinking milk
+    tags: cat beyonce milk drink
+    category: null
+    comments: null
+    serieses: null
+    views: 1000000
+    votes: 123456
+    
+  - !!models.Video
+    author: !!models.User
+        id: 1
+    url: RZuJ_OHBN78
+    title: Naughty cat
+    description: lovely cat drinking milk
+    tags: cat beyonce milk drink
+    category: null
+    comments: null
+    serieses: null
+    views: 100000
+    votes: 654321
+    
+  - !!models.Video
+    author: !!models.User
+        id: 1
+    url: FHp2KgyQUFk
+    title: Yellow submarine
+    description: lovely cat drinking milk
+    tags: cat beyonce milk drink
+    category: null
+    comments: null
+    serieses: null
+    views: 10000
+    votes: 54321
+    
+  - !!models.Video
+    author: !!models.User
+        id: 1
+    url: vLnQPowbXOo
+    title: Mr Bean
+    description: lovely cat drinking milk
+    tags: cat beyonce milk drink
+    category: null
+    comments: null
+    serieses: null
+    views: 10000
+    votes: 54321
+
+    
+  - !!models.Video
+    author: !!models.User
+        id: 2
+    url: IjQJtIlfnm4
+    title: Talk
+    description: lovely cat drinking milk
+    tags: cat beyonce milk drink
+    category: null
+    comments: null
+    serieses: null
+    views: 10000
+    votes: 54321
+
+
+#categories:
+#
+#  - !!models.Category
+#    title: maths
+#    description: everything about maths
+#    subCategories: 
+#      - !!models.Category
+#        title: maths
+#        description: everything about maths
+#        subCategories: null
+#    
+#    - !!models.Category
+#        title: computing
+#        description: everything about computing
+#        subCategories: null
+#    
+#    - !!models.Category
+#        title: women
+#        description: everything we understand about women
+#        subCategories: null
+#
+#    - !!models.Category
+#        title: physics
+#        description: everything about physics
+#        subCategories: null

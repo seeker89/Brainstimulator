@@ -1,0 +1,35 @@
+@(title: String, videos: List[Video], categories: List[Category], category: Category, description: String, active : String, user: String)
+
+@browserHeader(title, user)
+    
+      <div class="row-fluid">
+        <div class="span3">
+        	@browserMenu(categories, active)
+        </div>
+        
+        <div class="span9">
+          <div class="row-fluid">
+            <div class="span12">
+              <h2>@category.description</h2>
+              <h2>@description</h2>
+            </div>
+          </div>
+        @for(video <- videos) {
+          <div class="row-fluid">
+	        <div class="span6">
+	       		<h2><a href="@routes.Browser.showVideo(video.id)">@video.title</a></h2>
+	       		<p class="lead">@video.description</p>
+	       		<br />
+	       		<p>@video.votes votes</p>
+	       		<p>@video.views views</p>
+
+	        </div>
+            <div class="span6">
+              @videoThumbnail(video)
+            </div>
+          </div>
+        }
+        </div>
+      </div>
+@browserFooter()
+          

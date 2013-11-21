@@ -1,0 +1,66 @@
+@(user : User, root : Category)
+
+@browserHeader(title = "Hello " + user.firstName, user.firstName)
+
+<link href="@routes.Assets.at("stylesheets/bootstrap.css")" rel="stylesheet">
+<link href="@routes.Assets.at("stylesheets/form.css")" rel="stylesheet">
+
+<div class="row-fluid">
+    <div class="span10">
+    
+	    <div class="container">
+	        <form class="form-video" method="post" action="@routes.Account.addVideo">
+	            <fieldset>
+	                <legend>Add video</legend>
+	                <input type="url" placeholder="Url" name="url" required><br/>
+	                <input type="text" placeholder="Title" name="title" required><br/>
+	                <textarea placeholder="Video's description" name="description" required></textarea>
+	                <input type="text" placeholder="Tags" name="tags" required><br/>
+	                <legend>Series</legend>
+	                <select name="series">
+	                    <option value="0">None</option>
+	                    @for(series <- user.serieses){
+	                    <option value="@series.id">@series.title</option>
+	                    }
+	                </select>
+	                <legend>Category</legend>
+	                <select name="category">
+	                    @for(cat <- root.subCategories){
+	                    <option value="@cat.id">@cat.title</option>
+	                    }
+	                </select>
+	                <button class="btn btn-large btn-primary" type="submit">Add video</button>
+	            </fieldset>
+	        </form>
+
+	        <form class="form-series" method="post" action="@routes.Account.addSeries">
+	            <fieldset>
+	                <legend>Add Series</legend>
+	                <input type="text" placeholder="Title" name="title" required><br/>
+	                <textarea placeholder="Series' description" name="description" required></textarea>
+	                <input type="text" placeholder="Tags" name="tags" required><br/>
+	                <button class="btn btn-large btn-primary" type="submit">Add series</button>
+	            </fieldset>
+	        </form>
+	    </div>
+    
+    </div>
+    <div class="span2 well">
+    	<p>Welcome, @user.firstName !</p>
+    	<p>
+    	<div id="gravatar-container">@user.mail</div>
+    	</p>
+    	@if(user.isAdmin){
+	    	<p><a href="@routes.Admin.index()" class="btn btn-success">ADMIN PANEL</a></p>
+    	}
+    	<p><a href="#" class="btn" id="geo-me">Geolocalize me!</a></p>
+    	<p><a href="@routes.Account.logout()" class="btn" id="geo-me">Logout!</a></p>
+    </div>
+</div>
+
+<div class="row-fluid">
+	<div id="carte"></div>
+</div>
+
+
+@browserFooter()
